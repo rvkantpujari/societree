@@ -1,0 +1,1 @@
+<img src="{{asset('/logo/societree-logo-light-tp.png')}}" alt="SocieTree Logo" {{ $attributes }}>
