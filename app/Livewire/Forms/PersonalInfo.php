@@ -18,4 +18,16 @@ class PersonalInfo extends Form
 
     #[Validate('date')]
     public $dob;
+
+    #[Validate('nullable|string|max:15')]
+    public $phone;
+
+    public function save($request)
+    {
+        $request->user()->fill($this->validate());
+
+        $request->user()->save();
+
+        $this->reset();
+    }
 }

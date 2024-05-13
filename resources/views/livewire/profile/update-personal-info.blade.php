@@ -14,7 +14,7 @@
     </form>
 
     <form wire:submit.prevent="save" class="mt-6 space-y-6">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-2 space-y-4 md:space-y-0 md:space-x-10">
+        <div class="grid grid-cols-1 md:grid-cols-6 gap-2 space-y-4 md:space-y-0 md:space-x-10">
             <div class="col-span-4 space-y-4">
                 <div class="grid grid-cols-6 space-y-4 md:space-y-0 md:space-x-3">
                     <div class="col-span-full md:col-span-2">
@@ -75,10 +75,20 @@
                         />
                         <x-input-error class="mt-2" :messages="$errors->get('form.dob')" />
                     </div>
+
+                    <div class="col-span-full md:col-span-3">
+                        <x-input-label for="phone" :value="__('Phone')" />
+                        <x-text-input 
+                            id="phone" 
+                            name="phone" 
+                            class="mt-1 block w-full"
+                            wire:model="form.phone" />
+                        <x-input-error class="mt-2" :messages="$errors->get('form.phone')" />
+                    </div>
                 </div>
             </div>
 
-            <div class="col-span-1">
+            <div class="col-span-2">
                 <x-input-label for="profile_image" :value="__('Profile Image')" />
             </div>
         </div>
