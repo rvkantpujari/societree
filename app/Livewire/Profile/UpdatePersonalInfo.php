@@ -18,9 +18,7 @@ class UpdatePersonalInfo extends Component
         $this->form->first_name = $request->user()->first_name;
         $this->form->middle_name = $request->user()->middle_name;
         $this->form->last_name = $request->user()->last_name;
-        $this->form->email = $request->user()->email;
-        $this->hasVerifiedEmail = $request->user()->hasVerifiedEmail();
-        $this->user = $request->user();
+        $this->form->dob = $request->user()->dob;
 
         return view('livewire.profile.update-personal-info');
     }
@@ -28,11 +26,6 @@ class UpdatePersonalInfo extends Component
     public function save(Request $request)
     {
         $request->user()->fill($this->form->validate());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
         $request->user()->save();
 
         $this->form->reset();

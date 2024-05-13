@@ -16,6 +16,6 @@ class PersonalInfo extends Form
     #[Validate('required|min:2|max:50')]
     public $last_name;
 
-    #[Validate('required|email|max:255')]
-    public $email;
+    #[Validate('date')]
+    public $dob;
 }
