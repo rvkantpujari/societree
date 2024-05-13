@@ -9,7 +9,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
             <div class="p-6 md:p-8 bg-white shadow rounded-lg">
                 <div class="w-full">
-                    @include('profile.partials.update-personal-info-form')
+                    <livewire:profile.update-personal-info />
                 </div>
             </div>
 
