@@ -5,22 +5,28 @@
             <div class="w-full flex justify-between">
                 <!-- Logo -->
                 <div class="shrink-0 flex md:justify-center items-center">
-                    <a href="{{ route('dashboard') }}">
-                        <x-app-logo class="block h-16 w-auto fill-current text-gray-800" />
-                    </a>
+                    @auth
+                        <a href="{{ route('dashboard') }}" wire:navigate>
+                            <x-app-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        </a>
+                    @else
+                        <a href="{{ route('home') }}" wire:navigate>
+                            <x-app-logo class="block h-16 w-auto fill-current text-gray-800" />
+                        </a>
+                    @endauth
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @auth
-                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                        <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                             {{ __('Dashboard') }}
                         </x-nav-link>
                     @else
-                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        <x-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
                             {{ __('Login') }}
                         </x-nav-link>
-                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                        <x-nav-link :href="route('register')" :active="request()->routeIs('register')" wire:navigate>
                             {{ __('Register') }}
                         </x-nav-link>
                     @endauth
@@ -30,10 +36,10 @@
             <!-- Settings Dropdown -->
             @auth
                 <div class="hidden sm:flex sm:items-center sm:ms-6">
-                    <x-dropdown align="right" width="48">
+                    <x-dropdown align="right" width="80">
                         <x-slot name="trigger">
                             <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                                <div>{{ Auth::user()->name }}</div>
+                                <div>Account</div>
 
                                 <div class="ms-1">
                                     <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -44,15 +50,20 @@
                         </x-slot>
 
                         <x-slot name="content">
-                            <x-dropdown-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                            <div class="-mt-1 p-4 bg-lime-50 focus:outline-none focus:text-lime-800 focus:bg-lime-100 focus:border-lime-700">
+                                <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
+                                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                            </div>
+
+                            <x-dropdown-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" wire:navigate>
                                 {{ __('Profile') }}
                             </x-dropdown-link>
 
                             <!-- Authentication -->
-                            <form method="POST" action="{{ route('logout') }}">
+                            <form method="POST" action="{{ route('logout') }}" class="-mb-1">
                                 @csrf
 
-                                <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link :href="route('logout')" wire:navigate
                                         onclick="event.preventDefault();
                                                     this.closest('form').submit();">
                                     {{ __('Log Out') }}
@@ -79,14 +90,14 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             @auth
-                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                     {{ __('Dashboard') }}
                 </x-responsive-nav-link>
             @else
-                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                <x-responsive-nav-link :href="route('login')" :active="request()->routeIs('login')" wire:navigate>
                     {{ __('Login') }}
                 </x-responsive-nav-link>
-                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')">
+                <x-responsive-nav-link :href="route('register')" :active="request()->routeIs('register')" wire:navigate>
                     {{ __('Register') }}
                 </x-responsive-nav-link>
             @endauth
@@ -94,14 +105,14 @@
 
         @auth
             <!-- Responsive Settings Options -->
-            <div class="pt-4 pb-1 border-t border-gray-200">
-                <div class="px-4">
-                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+            <div class="border-t border-gray-200">
+                <div class="-mt-1 p-4 text-lime-700 bg-lime-50 focus:outline-none focus:text-lime-800 focus:bg-lime-100 focus:border-lime-700">
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->first_name }}</div>
                     <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
                 </div>
 
-                <div class="mt-3 space-y-1">
-                    <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')">
+                <div class="space-y-1">
+                    <x-responsive-nav-link :href="route('profile.edit')" :active="request()->routeIs('profile.edit')" wire:navigate>
                         {{ __('Profile') }}
                     </x-responsive-nav-link>
 
@@ -109,7 +120,7 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
 
-                        <x-responsive-nav-link :href="route('logout')"
+                        <x-responsive-nav-link :href="route('logout')" wire:navigate
                                 onclick="event.preventDefault();
                                             this.closest('form').submit();">
                             {{ __('Log Out') }}

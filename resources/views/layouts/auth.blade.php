@@ -17,7 +17,7 @@
     <body class="font-sans text-gray-900 antialiased">
         <section class="min-h-screen flex flex-col justify-center items-center md:pt-6 pt-0 px-4 bg-gray-100">
             <section>
-                <a href="/">
+                <a href="/" wire:navigate>
                     <x-app-logo class="w-full h-20 fill-current text-gray-500" />
                 </a>
             </section>

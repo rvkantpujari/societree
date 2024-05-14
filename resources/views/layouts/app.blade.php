@@ -22,7 +22,7 @@
         @livewireStyles
     </head>
     <body class="min-h-screen bg-gray-100 font-sans antialiased">
-        @include('layouts.navigation')
+        <livewire:auth.navigation />
 
         <!-- Page Heading -->
         @if (isset($header))
