@@ -15,7 +15,7 @@
 
             <div class="p-6 md:p-8 bg-white shadow rounded-lg">
                 <div class="w-full">
-                    @include('profile.partials.update-password-form')
+                    <livewire:profile.update-account-info />
                 </div>
             </div>
 
