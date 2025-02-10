@@ -40,8 +40,7 @@ class UserResource extends Resource
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 4
                                         ]),
                                     Forms\Components\TextInput::make('middle_name')
                                         ->maxLength(255)
@@ -49,8 +48,7 @@ class UserResource extends Resource
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 4
                                         ]),
                                     Forms\Components\TextInput::make('last_name')
                                         ->required()
@@ -58,15 +56,13 @@ class UserResource extends Resource
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 4
                                         ]),
                                     Forms\Components\DatePicker::make('date_of_birth')
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 6
                                         ]),
                                     Forms\Components\TextInput::make('phone')
                                         ->tel()
@@ -75,8 +71,7 @@ class UserResource extends Resource
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 6
                                         ]),
                                     Forms\Components\TextInput::make('email')
                                         ->email()
@@ -85,8 +80,7 @@ class UserResource extends Resource
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 6
                                         ]),
                                     Forms\Components\TextInput::make('password')
                                         ->password()
@@ -98,14 +92,12 @@ class UserResource extends Resource
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
-                                            'lg' => 4,
-                                            'xl' => 5
+                                            'lg' => 6
                                         ]),
                                 ])->columns([
                                     'sm' => 1,
                                     'md' => 6,
                                     'lg' => 12,
-                                    'xl' => 15,
                                 ]),
 
                             Section::make([
