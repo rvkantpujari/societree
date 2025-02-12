@@ -3,21 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Country extends Model
+class State extends Model
 {
     use SoftDeletes;
 
     protected $fillable = [
         'name',
-        'code',
-        'phone_code',
+        'country_id'
     ];
 
-    public function states(): HasMany
+    public function country(): BelongsTo
     {
-        return $this->hasMany(State::class);
+        return $this->belongsTo(Country::class);
     }
 }

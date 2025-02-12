@@ -2,10 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CountryResource\Pages;
-use App\Filament\Resources\CountryResource\RelationManagers;
-use App\Filament\Resources\CountryResource\RelationManagers\StatesRelationManager;
-use App\Models\Country;
+use App\Filament\Resources\StateResource\Pages;
+use App\Filament\Resources\StateResource\RelationManagers;
+use App\Models\State;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
@@ -15,40 +14,33 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CountryResource extends Resource
+class StateResource extends Resource
 {
-    protected static ?string $model = Country::class;
+    protected static ?string $model = State::class;
 
     protected static ?string $navigationGroup = 'System Management';
 
-    protected static ?string $navigationIcon = 'heroicon-o-flag';
+    protected static ?string $navigationIcon = 'heroicon-o-building-library';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Section::make([])
+                Section::make()
                     ->schema([
                         Forms\Components\TextInput::make('name')
-                            ->unique()
-                            ->required()
-                            ->maxLength(255)
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('code')
-                            ->unique()
                             ->required()
                             ->maxLength(255)
                             ->columns(1),
-                        Forms\Components\TextInput::make('phone_code')
-                            ->tel()
-                            ->required()
-                            ->numeric()
-                            ->columns(1),
-                    ])->columns([
-                        'sm' => 1,
-                        'md' => 2,
-                        'lg' => 2,
+                        Forms\Components\Select::make('country_id')
+                            ->searchable()
+                            ->relationship('country', 'name')
+                            ->required(1),
                     ])
+            ])->columns([
+                'sm' => 1,
+                'md' => 2,
+                'lg' => 2,
             ]);
     }
 
@@ -57,30 +49,29 @@ class CountryResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('code')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone_code')
-                    ->numeric()
+                Tables\Columns\TextColumn::make('country.name')
                     ->searchable()
+                    ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
+                    ->searchable()
                     ->dateTime()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Updated')
+                    ->searchable()
                     ->dateTime()
-                    ->sortable()
-                    ->dateTimeTooltip()
                     ->since()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTimeTooltip()
+                    ->sortable()
+                    ->toggleable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
-            ->defaultSort('name')
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
             ])
@@ -101,16 +92,16 @@ class CountryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            StatesRelationManager::class
+            //
         ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCountries::route('/'),
-            'create' => Pages\CreateCountry::route('/create'),
-            'edit' => Pages\EditCountry::route('/{record}/edit'),
+            'index' => Pages\ListStates::route('/'),
+            'create' => Pages\CreateState::route('/create'),
+            'edit' => Pages\EditState::route('/{record}/edit'),
         ];
     }
 
