@@ -27,10 +27,12 @@ class CountryResource extends Resource
                 Section::make([])
                     ->schema([
                         Forms\Components\TextInput::make('name')
+                            ->unique()
                             ->required()
                             ->maxLength(255)
                             ->columnSpanFull(),
                         Forms\Components\TextInput::make('code')
+                            ->unique()
                             ->required()
                             ->maxLength(255)
                             ->columns(1),
