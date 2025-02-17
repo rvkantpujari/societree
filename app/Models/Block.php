@@ -51,4 +51,10 @@ class Block extends Model
     {
         return $this->belongsTo(Society::class);
     }
+
+    // 1-N relationship (Block has one or more Units)
+    public function units()
+    {
+        return $this->hasMany(Unit::class);
+    }
 }
