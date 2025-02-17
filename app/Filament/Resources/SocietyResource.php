@@ -31,18 +31,14 @@ class SocietyResource extends Resource
     {
         return $form
             ->schema([
-                Section::make('Create Society')
-                    ->description('Add details such as name, number of units, address and description.')
+                Section::make('Create or Edit Society')
+                    ->description('Add or update details such as name, number of units, address and description.')
                     ->icon('heroicon-m-building-office-2')
                     ->schema([
                         Forms\Components\TextInput::make('name')
                             ->required()
                             ->maxLength(255)
                             ->live(debounce: 800) // Enables live updates with slight delay
-                            // ->afterStateUpdated(
-                            //     fn($state, callable $set) =>
-                            //     $set('slug', Str::slug($state))
-                            // )
                             ->afterStateUpdated(function ($state, callable $get, callable $set) {
                                 $existingSlug = $get('slug');
 
@@ -61,7 +57,6 @@ class SocietyResource extends Resource
                         Forms\Components\TextInput::make('slug')
                             ->label('Slug')
                             ->disabled()
-                            // ->dehydrated(false) // Prevents from being submitted manually
                             ->columnSpan([
                                 'sm' => 1,
                                 'md' => 2,
@@ -206,14 +201,12 @@ class SocietyResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->since()
-                    ->dateTimeTooltip()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
                     ->sortable()
-                    ->sinceTooltip()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('deleted')
+                    ->dateTime()
+                    ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->defaultSort('name')

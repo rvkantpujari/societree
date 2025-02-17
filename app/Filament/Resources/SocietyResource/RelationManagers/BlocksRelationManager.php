@@ -51,21 +51,15 @@ class BlocksRelationManager extends RelationManager
                     ->label('Block')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->searchable()
                     ->dateTime()
-                    ->sinceTooltip()
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Updated')
-                    ->searchable()
-                    ->since()
-                    ->dateTimeTooltip()
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('deleted_at')
                     ->dateTime()
-                    ->sinceTooltip()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

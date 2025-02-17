@@ -55,19 +55,14 @@ class StateResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->searchable()
                     ->dateTime()
                     ->sortable()
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->label('Updated')
-                    ->searchable()
                     ->dateTime()
-                    ->since()
-                    ->dateTimeTooltip()
                     ->sortable()
                     ->toggleable(),
-                Tables\Columns\TextColumn::make('deleted_at')
+                Tables\Columns\TextColumn::make('deleted')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
