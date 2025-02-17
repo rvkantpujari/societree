@@ -14,11 +14,14 @@ return new class extends Migration
         Schema::create('societies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('slug');
+            $table->string('random_slug_key')->unique();
             $table->integer('number_of_units');
             $table->string('street');
             $table->string('landmark')->nullable();
+            $table->string('area')->nullable();
             $table->string('city')->nullable();
-            $table->foreignId('state_id')->constrained()->cascadeOnUpdate()->nullOnDelete();
+            $table->foreignId('state_id')->constrained()->cascadeOnUpdate();
             $table->text('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
