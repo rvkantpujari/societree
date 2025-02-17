@@ -45,6 +45,7 @@ class BlocksRelationManager extends RelationManager
     public function table(Table $table): Table
     {
         return $table
+            ->recordTitle('Block')
             ->recordTitleAttribute('name')
             ->columns([
                 Tables\Columns\TextColumn::make('name')
@@ -67,10 +68,10 @@ class BlocksRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Add Block'),
+                Tables\Actions\CreateAction::make()->label('Add Block')->slideOver(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->slideOver(),
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\RestoreAction::make(),
             ])
