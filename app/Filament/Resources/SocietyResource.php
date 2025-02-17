@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\SocietyResource\Pages;
 use App\Filament\Resources\SocietyResource\RelationManagers;
+use App\Filament\Resources\SocietyResource\RelationManagers\BlocksRelationManager;
 use App\Models\Country;
 use App\Models\State;
 use App\Models\Society;
@@ -236,7 +237,7 @@ class SocietyResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            BlocksRelationManager::class
         ];
     }
 
