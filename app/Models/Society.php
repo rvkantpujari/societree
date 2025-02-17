@@ -62,4 +62,10 @@ class Society extends Model
     {
         return $this->state->country();
     }
+
+    // 1-N relationship (Society has one or many Blocks)
+    public function blocks()
+    {
+        return $this->hasMany(Block::class);
+    }
 }

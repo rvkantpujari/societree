@@ -19,4 +19,10 @@ class Block extends Model
         'description',
         'society_id'
     ];
+
+    // Inverse relationship (Block -> Society)
+    public function society()
+    {
+        return $this->belongsTo(Society::class);
+    }
 }
