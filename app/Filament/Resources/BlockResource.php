@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlockResource\Pages;
 use App\Filament\Resources\BlockResource\RelationManagers;
+use App\Filament\Resources\BlockResource\RelationManagers\UnitsRelationManager;
 use App\Models\Block;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -102,11 +103,10 @@ class BlockResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
-                    ->since()
-                    ->dateTimeTooltip()
+                    ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
+                Tables\Columns\TextColumn::make('deleted')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -136,7 +136,7 @@ class BlockResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UnitsRelationManager::class
         ];
     }
 

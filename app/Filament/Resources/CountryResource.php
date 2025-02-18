@@ -72,10 +72,8 @@ class CountryResource extends Resource
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
-                    ->dateTimeTooltip()
-                    ->since()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
+                Tables\Columns\TextColumn::make('deleted')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),

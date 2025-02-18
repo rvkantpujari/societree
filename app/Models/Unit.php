@@ -4,18 +4,21 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class Country extends Model
+class Unit extends Model
 {
     use SoftDeletes;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var list<string>
+     */
     protected $fillable = [
-        'name',
-        'code',
-        'phone_code',
+        'unit_name',
+        'block_id',
     ];
 
     public function getCreatedAtAttribute($value)
@@ -40,10 +43,5 @@ class Country extends Model
     {
         $timezone = Auth::check() ? Auth::user()->timezone : config('app.timezone');
         return Carbon::parse($value)->tz($timezone)->toDateTimeString();
-    }
-
-    public function states(): HasMany
-    {
-        return $this->hasMany(State::class);
     }
 }

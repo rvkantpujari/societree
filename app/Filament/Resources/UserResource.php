@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\UserResource\Pages;
 use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
+use Carbon\Carbon;
 use Filament\Forms;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
@@ -15,6 +16,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class UserResource extends Resource
@@ -59,6 +61,20 @@ class UserResource extends Resource
                                             'lg' => 4
                                         ]),
                                     Forms\Components\DatePicker::make('date_of_birth')
+                                        ->columnSpan([
+                                            'sm' => 1,
+                                            'md' => 2,
+                                            'lg' => 6
+                                        ]),
+                                    Forms\Components\Select::make('timezone')
+                                        ->label('Timezone')
+                                        ->options(array_combine(
+                                            \DateTimeZone::listIdentifiers(),
+                                            \DateTimeZone::listIdentifiers()
+                                        ))
+                                        ->default('UTC')
+                                        ->searchable()
+                                        ->required()
                                         ->columnSpan([
                                             'sm' => 1,
                                             'md' => 2,
@@ -137,17 +153,14 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
-                    ->sinceTooltip()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->dateTime()
-                    ->sinceTooltip()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('deleted_at')
+                Tables\Columns\TextColumn::make('deleted')
                     ->dateTime()
-                    ->sinceTooltip()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
