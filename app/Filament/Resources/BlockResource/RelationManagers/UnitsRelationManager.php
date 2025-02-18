@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\SocietyResource\RelationManagers;
+namespace App\Filament\Resources\BlockResource\RelationManagers;
 
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -10,47 +10,31 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class BlocksRelationManager extends RelationManager
+class UnitsRelationManager extends RelationManager
 {
-    protected static string $relationship = 'blocks';
+    protected static string $relationship = 'units';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
+                Forms\Components\TextInput::make('unit_name')
+                    ->label('Unit')
+                    ->hintIcon('heroicon-m-question-mark-circle', tooltip: 'Unit name accepts alphanumeric value.')
                     ->required()
-                    ->maxLength(255),
-                Forms\Components\RichEditor::make('description')
-                    ->toolbarButtons([
-                        'blockquote',
-                        'bold',
-                        'bulletList',
-                        'h1',
-                        'h2',
-                        'h3',
-                        'italic',
-                        'orderedList',
-                        'redo',
-                        'strike',
-                        'underline',
-                        'undo',
-                    ])
-                    ->disableGrammarly()
-                    ->nullable(),
-            ])
-            ->columns(1);
+                    ->maxLength(255)
+            ])->columns(1);
     }
 
     public function table(Table $table): Table
     {
         return $table
-            ->recordTitle('Block')
-            ->recordTitleAttribute('name')
+            ->recordTitle('Unit')
+            ->recordTitleAttribute('unit_name')
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->label('Block')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('unit_name')
+                    ->searchable()
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -68,7 +52,7 @@ class BlocksRelationManager extends RelationManager
                 Tables\Filters\TrashedFilter::make(),
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make()->label('Add Block')->slideOver(),
+                Tables\Actions\CreateAction::make()->label('Add Unit')->slideOver(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make()->slideOver(),

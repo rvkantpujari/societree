@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BlockResource\Pages;
 use App\Filament\Resources\BlockResource\RelationManagers;
+use App\Filament\Resources\BlockResource\RelationManagers\UnitsRelationManager;
 use App\Models\Block;
 use Filament\Forms;
 use Filament\Forms\Components\Section;
@@ -135,7 +136,7 @@ class BlockResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            UnitsRelationManager::class
         ];
     }
 

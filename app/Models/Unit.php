@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 
-class Block extends Model
+class Unit extends Model
 {
     use SoftDeletes;
 
@@ -17,9 +17,8 @@ class Block extends Model
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'description',
-        'society_id'
+        'unit_name',
+        'block_id',
     ];
 
     public function getCreatedAtAttribute($value)
@@ -44,17 +43,5 @@ class Block extends Model
     {
         $timezone = Auth::check() ? Auth::user()->timezone : config('app.timezone');
         return Carbon::parse($value)->tz($timezone)->toDateTimeString();
-    }
-
-    // Inverse relationship (Block -> Society)
-    public function society()
-    {
-        return $this->belongsTo(Society::class);
-    }
-
-    // 1-N relationship (Block has one or more Units)
-    public function units()
-    {
-        return $this->hasMany(Unit::class);
     }
 }
