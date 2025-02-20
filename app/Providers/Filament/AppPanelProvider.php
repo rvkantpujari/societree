@@ -2,6 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\App\Resources\UserResource\Pages\Auth\Register;
+use App\Filament\Pages\Auth\EditUserProfile;
+use App\Filament\Pages\Tenancy\EditSocietyProfile;
+use App\Filament\Pages\Tenancy\RegisterSociety;
+use App\Models\Society;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -25,6 +30,13 @@ class AppPanelProvider extends PanelProvider
         return $panel
             ->id('app')
             ->path('app')
+            ->login()
+            ->registration(Register::class)
+            ->passwordReset()
+            ->profile(EditUserProfile::class)
+            ->tenant(Society::class, ownershipRelationship: 'society', slugAttribute: 'slug')
+            ->tenantRegistration(RegisterSociety::class)
+            ->tenantProfile(EditSocietyProfile::class)
             ->colors([
                 'primary' => Color::Amber,
             ])

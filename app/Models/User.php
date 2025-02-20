@@ -7,14 +7,19 @@ namespace App\Models;
 use Carbon\Carbon;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasName;
+use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
-class User extends Authenticatable implements FilamentUser, HasName
+class User extends Authenticatable implements FilamentUser, HasName, HasTenants
 {
     use SoftDeletes;
 
@@ -93,5 +98,25 @@ class User extends Authenticatable implements FilamentUser, HasName
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function society(): BelongsTo
+    {
+        return $this->belongsTo(Society::class);
+    }
+
+    public function societies(): BelongsToMany
+    {
+        return $this->belongsToMany(Society::class);
+    }
+
+    public function getTenants(Panel $panel): Collection
+    {
+        return $this->societies;
+    }
+
+    public function canAccessTenant(Model $tenant): bool
+    {
+        return $this->societies()->whereKey($tenant)->exists();
     }
 }
