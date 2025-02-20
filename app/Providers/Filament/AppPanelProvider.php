@@ -37,6 +37,7 @@ class AppPanelProvider extends PanelProvider
             ->tenant(Society::class, ownershipRelationship: 'society', slugAttribute: 'slug')
             ->tenantRegistration(RegisterSociety::class)
             ->tenantProfile(EditSocietyProfile::class)
+            ->tenantRoutePrefix('society')
             ->colors([
                 'primary' => Color::Amber,
             ])
