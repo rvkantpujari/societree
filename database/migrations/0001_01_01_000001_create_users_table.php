@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->foreignId('society_id')->nullable()->constrained()->cascadeOnUpdate();
             $table->string('timezone')->default('UTC'); // Default to UTC
             $table->rememberToken();
             $table->timestamps();

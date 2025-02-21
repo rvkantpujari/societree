@@ -3,13 +3,16 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Filament\Models\Contracts\HasCurrentTenantLabel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 
-class Society extends Model
+class Society extends Model implements HasCurrentTenantLabel
 {
     use SoftDeletes;
 
@@ -93,5 +96,20 @@ class Society extends Model
     public function blocks()
     {
         return $this->hasMany(Block::class);
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
+    }
+
+    public function members(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
+
+    public function getCurrentTenantLabel(): string
+    {
+        return 'Actively Viewing';
     }
 }
