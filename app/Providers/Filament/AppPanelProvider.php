@@ -51,6 +51,9 @@ class AppPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
             ])
+            ->plugin(
+                \Hasnayeen\Themes\ThemesPlugin::make()
+            )
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
@@ -61,6 +64,9 @@ class AppPanelProvider extends PanelProvider
                 SubstituteBindings::class,
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
+            ])
+            ->tenantMiddleware([
+                \Hasnayeen\Themes\Http\Middleware\SetTheme::class,
             ])
             ->authMiddleware([
                 Authenticate::class,
