@@ -28,6 +28,7 @@ class RootPanelProvider extends PanelProvider
             ->id('root')
             ->path('root')
             ->login()
+            ->loginRouteSlug('signin')
             ->passwordReset()
             ->emailVerification()
             ->emailChangeVerification()
