@@ -13,7 +13,7 @@ class ListCountries extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            CreateAction::make(),
+            CreateAction::make()->label('Add Country')->modal()->modalHeading('Add Country')->slideOver(),
         ];
     }
 }

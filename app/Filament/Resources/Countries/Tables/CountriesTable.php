@@ -49,7 +49,7 @@ class CountriesTable
                 TrashedFilter::make(),
             ])
             ->recordActions([
-                EditAction::make()->slideOver(),
+                EditAction::make()->modal()->slideOver(),
                 DeleteAction::make()->slideOver(),
                 RestoreAction::make()->slideOver(),
                 ForceDeleteAction::make()->slideOver(),

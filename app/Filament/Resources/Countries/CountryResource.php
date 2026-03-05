@@ -9,6 +9,7 @@ use App\Filament\Resources\Countries\Schemas\CountryForm;
 use App\Filament\Resources\Countries\Tables\CountriesTable;
 use App\Models\Country;
 use BackedEnum;
+use UnitEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -20,7 +21,11 @@ class CountryResource extends Resource
 {
     protected static ?string $model = Country::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static ?int $navigationSort = 1;
+
+    protected static string | UnitEnum | null $navigationGroup = 'System Management';
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFlag;
 
     protected static ?string $recordTitleAttribute = 'name';
 
