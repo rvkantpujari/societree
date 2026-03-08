@@ -14,4 +14,10 @@ class Country extends Model
         'code',
         'phone_code',
     ];
+
+    // Country has many States
+    public function states()
+    {
+        return $this->hasMany(State::class);
+    }
 }

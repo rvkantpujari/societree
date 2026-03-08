@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Countries;
 use App\Filament\Resources\Countries\Pages\CreateCountry;
 use App\Filament\Resources\Countries\Pages\EditCountry;
 use App\Filament\Resources\Countries\Pages\ListCountries;
+use App\Filament\Resources\Countries\RelationManagers\StatesRelationManager;
 use App\Filament\Resources\Countries\Schemas\CountryForm;
 use App\Filament\Resources\Countries\Tables\CountriesTable;
 use App\Models\Country;
@@ -22,6 +23,12 @@ class CountryResource extends Resource
     protected static ?string $model = Country::class;
 
     protected static ?int $navigationSort = 1;
+
+    protected static ?string $navigationLabel = 'Countries';
+
+    protected static ?string $modelLabel = 'Manage Country';
+
+    protected static ?string $pluralModelLabel = 'Manage Countries';
 
     protected static string | UnitEnum | null $navigationGroup = 'System Management';
 
@@ -42,7 +49,7 @@ class CountryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            'states' => StatesRelationManager::class,
         ];
     }
 
