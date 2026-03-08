@@ -2,7 +2,6 @@
 
 namespace App\Providers\Filament;
 
-use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -39,7 +38,6 @@ class RootPanelProvider extends PanelProvider
                 'primary' => Color::hex('#628522'),
             ])
             ->plugins([
-                GlobalSearchModalPlugin::make(),
                 FilamentCommandPalettePlugin::make(),
             ])
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\Filament\Resources')
