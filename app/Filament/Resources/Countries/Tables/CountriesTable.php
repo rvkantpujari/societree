@@ -25,7 +25,8 @@ class CountriesTable
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('code')
-                    ->searchable(),
+                    ->searchable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('phone_code')
                     ->numeric()
                     ->searchable()
@@ -49,11 +50,12 @@ class CountriesTable
             ])
             ->recordUrl(null)
             ->recordActions([
-                ViewAction::make()->slideOver(),
-                EditAction::make()->modal()->slideOver(),
-                DeleteAction::make()->slideOver(),
-                RestoreAction::make()->slideOver(),
-                ForceDeleteAction::make()->slideOver(),
+                ViewAction::make()->modal()->slideOver(),
+                EditAction::make(),
+                DeleteAction::make()->modal()->slideOver()
+                    ->visible(fn($record) => ! $record->states()->exists()),
+                ForceDeleteAction::make()->modal()->slideOver(),
+                RestoreAction::make()->modal()->slideOver(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -1,25 +1,24 @@
 <?php
 
-namespace App\Filament\Resources\Countries\Pages;
+namespace App\Filament\Resources\Countries\Resources\States\Pages;
 
-use App\Filament\Resources\Countries\CountryResource;
+use App\Filament\Resources\Countries\Resources\States\StateResource;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\RestoreAction;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
 
-class EditCountry extends EditRecord
+class EditState extends EditRecord
 {
-    protected static string $resource = CountryResource::class;
+    protected static string $resource = StateResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            DeleteAction::make()->slideOver()
-                ->visible(fn($record) => ! $record->states()->exists()),
-            ForceDeleteAction::make()->slideOver(),
-            RestoreAction::make()->slideOver(),
+            DeleteAction::make(),
+            ForceDeleteAction::make(),
+            RestoreAction::make(),
         ];
     }
 
@@ -33,10 +32,5 @@ class EditCountry extends EditRecord
 
             $this->halt();
         }
-    }
-
-    protected function getRedirectUrl(): string
-    {
-        return $this->getResource()::getUrl('index');
     }
 }
