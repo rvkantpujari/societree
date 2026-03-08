@@ -29,7 +29,7 @@ class StateResource extends Resource
 
     protected static ?string $parentResource = CountryResource::class;
 
-    protected static ?string $recordTitleAttribute = 'name';
+    // protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
