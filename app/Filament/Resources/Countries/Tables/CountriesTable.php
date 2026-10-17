@@ -11,7 +11,9 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\QueryBuilder\Constraints\TextConstraint;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\QueryBuilder;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 
@@ -50,6 +52,11 @@ class CountriesTable
             ->defaultSort('country_name')
             ->filters([
                 TrashedFilter::make(),
+                QueryBuilder::make()
+                    ->constraints([
+                        TextConstraint::make('country_name')->label('Country'),
+                        TextConstraint::make('country_code')->label('Country Code'),
+                    ]),
             ])
             ->recordAction(ViewAction::class)
             ->recordUrl(null)
