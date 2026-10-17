@@ -22,7 +22,7 @@ class CountryResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedFlag;
 
-    protected static ?string $recordTitleAttribute = 'Country';
+    protected static ?string $recordTitleAttribute = 'country_name';
 
     protected static string | \UnitEnum | null $navigationGroup = 'System Management';
 
